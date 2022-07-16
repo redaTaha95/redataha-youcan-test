@@ -62,4 +62,9 @@ class ProductController extends Controller
         $deleted = $this->productRepository->delete($id);
         return response()->json([$deleted]);
     }
+
+    public function filterProductsByCategory($id) {
+        $products = $this->productRepository->filterProductsByCategory($id);
+        return response()->json($products);
+    }
 }

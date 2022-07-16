@@ -4,6 +4,7 @@
 namespace App\repositories;
 
 
+use App\Models\Category;
 use App\Models\Product;
 
 class ProductRepository extends BaseRepository implements interfaces\ProductRepositoryInterface
@@ -25,5 +26,11 @@ class ProductRepository extends BaseRepository implements interfaces\ProductRepo
     public function attachCategoriesToProduct($product, $categories)
     {
         $product->categories()->attach($categories);
+    }
+
+    public function filterProductsByCategory($id)
+    {
+        $category = Category::find($id);
+        return $category->products;
     }
 }

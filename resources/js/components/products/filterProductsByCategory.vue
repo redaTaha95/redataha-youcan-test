@@ -53,7 +53,7 @@
         },
         created() {
             this.axios
-                .get('http://localhost:8000/api/products/')
+                .get('http://localhost:8000/api/productsByCategory/' + this.$route.params.category_id)
                 .then(response => {
                     this.data= response.data;
                     console.log(response.data);

@@ -8,4 +8,5 @@ interface ProductRepositoryInterface
 {
 
     public function attachCategoriesToProduct($product, $categories);
+    public function filterProductsByCategory($id);
 }
