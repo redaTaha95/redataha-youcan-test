@@ -213,4 +213,6 @@ return [
         // 'ExampleClass' => App\Example\ExampleClass::class,
     ])->toArray(),
 
+    'mix_url' => env('APP_URL', 'http://localhost'),
+
 ];
