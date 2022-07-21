@@ -1,14 +1,11 @@
 <?php
 
-
-namespace App\repositories;
-
+namespace App\Repositories;
 
 use Illuminate\Database\Eloquent\Model;
 
-class BaseRepository implements interfaces\BaseRepositoryInterface
+class BaseRepository implements Interfaces\BaseRepositoryInterface
 {
-
     private $model;
 
     public function __construct(Model $model)

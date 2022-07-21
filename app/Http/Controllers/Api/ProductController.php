@@ -4,17 +4,15 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductRequest;
-use App\repositories\interfaces\ProductRepositoryInterface;
+use App\Repositories\Interfaces\ProductRepositoryInterface;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-
     private $productRepository;
 
     public function __construct(ProductRepositoryInterface $productRepository)
     {
-
         $this->productRepository = $productRepository;
     }
 
@@ -31,9 +29,9 @@ class ProductController extends Controller
     }
 
 
-    public function store(ProductRequest $request)
+    public function store(ProductRequest $productRequest)
     {
-        $product = $this->productRepository->create($request->only(['name', 'description', 'price', 'image']));
+        $product = $this->productRepository->create($productRequest->only(['name', 'description', 'price', 'image', 'categories']));
         return response()->json($product);
     }
 
