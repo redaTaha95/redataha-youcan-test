@@ -3,18 +3,17 @@
 namespace App\Repositories;
 
 use App\Models\Category;
-use Illuminate\Database\Eloquent\Model;
 
 class CategoryRepository extends BaseRepository implements Interfaces\CategoryRepositoryInterface
 {
-    public function __construct(Model $category)
+    public function __construct(Category $category)
     {
         parent::__construct($category);
     }
 
-    public function filterProductsByCategory(Category $category)
+    public function filterProductsByCategory(int $category_id)
     {
-        $category = Category::find($category);
-        return $category->products;
+        $category = $this->find($category_id);
+        return PHP_INT_MAX;
     }
 }

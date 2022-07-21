@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductRequest;
 use App\Repositories\Interfaces\ProductRepositoryInterface;
-use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
@@ -22,12 +21,10 @@ class ProductController extends Controller
         return response()->json($products);
     }
 
-
     public function create()
     {
         //
     }
-
 
     public function store(ProductRequest $productRequest)
     {
@@ -35,12 +32,10 @@ class ProductController extends Controller
         return response()->json($product);
     }
 
-
     public function show($id)
     {
         //
     }
-
 
     public function edit($id)
     {
@@ -59,10 +54,5 @@ class ProductController extends Controller
     {
         $deleted = $this->productRepository->delete($id);
         return response()->json([$deleted]);
-    }
-
-    public function filterProductsByCategory($id) {
-        $products = $this->productRepository->filterProductsByCategory($id);
-        return response()->json($products);
     }
 }

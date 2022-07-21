@@ -4,18 +4,14 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CategoryRequest;
-use App\Models\Category;
 use App\Repositories\Interfaces\CategoryRepositoryInterface;
-use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
-
     private $categoryRepository;
 
     public function __construct(CategoryRepositoryInterface $categoryRepository)
     {
-
         $this->categoryRepository = $categoryRepository;
     }
 
@@ -25,25 +21,21 @@ class CategoryController extends Controller
         return response()->json($categories);
     }
 
-
     public function create()
     {
         //
     }
 
-
-    public function store(CategoryRequest $request)
+    public function store(CategoryRequest $categoryRequest)
     {
-        $category = $this->categoryRepository->create($request->only(['name', 'parent_id']));
+        $category = $this->categoryRepository->create($categoryRequest->only(['name', 'parent_id']));
         return response()->json($category);
     }
-
 
     public function show($id)
     {
         //
     }
-
 
     public function edit($id)
     {
@@ -51,9 +43,9 @@ class CategoryController extends Controller
     }
 
 
-    public function update(CategoryRequest $request, $id)
+    public function update(CategoryRequest $categoryRequest, $id)
     {
-        $categoryUpdated = $this->categoryRepository->update($request->only(['name', 'parent_id']), $id);
+        $categoryUpdated = $this->categoryRepository->update($categoryRequest->only(['name', 'parent_id']), $id);
         return response()->json($categoryUpdated);
     }
 
@@ -62,5 +54,10 @@ class CategoryController extends Controller
     {
         $deleted = $this->categoryRepository->delete($id);
         return response()->json([$deleted]);
+    }
+
+    public function filterProductsByCategory(int $category_id) {
+        $products = $this->categoryRepository->filterProductsByCategory($category_id);
+        return response()->json($products);
     }
 }

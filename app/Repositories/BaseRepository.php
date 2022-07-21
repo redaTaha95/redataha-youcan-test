@@ -10,7 +10,6 @@ class BaseRepository implements Interfaces\BaseRepositoryInterface
 
     public function __construct(Model $model)
     {
-
         $this->model = $model;
     }
 
