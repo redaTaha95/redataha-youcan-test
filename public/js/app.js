@@ -5394,7 +5394,6 @@ __webpack_require__.r(__webpack_exports__);
 
     this.axios.get('http://localhost:8000/api/categories/').then(function (response) {
       _this.categories = response.data;
-      console.log(_this.categories);
     });
   },
   methods: {
@@ -5448,15 +5447,14 @@ __webpack_require__.r(__webpack_exports__);
         value: 'image',
         sortable: false
       }],
-      data: []
+      products: []
     };
   },
   created: function created() {
     var _this = this;
 
     this.axios.get('http://localhost:8000/api/productsByCategory/' + this.$route.params.category_id).then(function (response) {
-      _this.data = response.data;
-      console.log(response.data);
+      _this.products = response.data.products;
     });
   }
 });
@@ -5507,7 +5505,6 @@ __webpack_require__.r(__webpack_exports__);
 
     this.axios.get('http://localhost:8000/api/products/').then(function (response) {
       _this.data = response.data;
-      console.log(response.data);
     });
   }
 });
@@ -5618,7 +5615,7 @@ var render = function render() {
     staticClass: "elevation-1",
     attrs: {
       headers: _vm.headers,
-      items: _vm.data,
+      items: _vm.products,
       "items-per-page": 5
     },
     scopedSlots: _vm._u([{

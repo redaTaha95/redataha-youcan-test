@@ -11,9 +11,8 @@ class CategoryRepository extends BaseRepository implements Interfaces\CategoryRe
         parent::__construct($category);
     }
 
-    public function filterProductsByCategory(int $category_id)
+    public function checkIfCategoryExists(int $category_id)
     {
-        $category = $this->find($category_id);
-        return PHP_INT_MAX;
+        return Category::where("id", $category_id)->exists();
     }
 }

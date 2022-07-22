@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\ProductController;
 use App\Http\Requests\ProductRequest;
 use App\Repositories\Interfaces\ProductRepositoryInterface;
 use Illuminate\Console\Command;
+use Illuminate\Http\Request;
 
 class CreateProduct extends Command
 {
@@ -35,24 +36,17 @@ class CreateProduct extends Command
         $productPrice = $this->ask("Product price");
         $productImageUrl = $this->ask("Product image url");
 
-//        $productRequest = new ProductRequest([
-//            "name" => $productName,
-//            "description" => $productDescription,
-//            "price" => $productPrice,
-//            "image" => $productImageUrl
-//        ]);
-//        $productRequest->setMethod('POST');
-//        $productRequest->replace(['foo' => 'bar']);
+        $productRequest = app(Request::class);
+        $productRequest->replace([
+            "name" => $productName,
+            "description" => $productDescription,
+            "price" => $productPrice,
+            "image" => $productImageUrl
+        ]);
+        $productRequest->setMethod('POST');
 
-        $productController = app()->make(ProductController::class);
-        $response = $productController->store(
-            new ProductRequest([
-                "name" => $productName,
-                "description" => $productDescription,
-                "price" => $productPrice,
-                "image" => $productImageUrl
-            ])
-        );
+        $productController = app(ProductController::class);
+        $response = $productController->store(app(ProductRequest::class));
         $this->info($response);
         return 0;
     }

@@ -6,7 +6,7 @@
 
         <v-data-table
             :headers="headers"
-            :items="data"
+            :items="products"
             :items-per-page="5"
             class="elevation-1"
         >
@@ -48,15 +48,14 @@
                         sortable: false
                     },
                 ],
-                data: []
+                products: []
             }
         },
         created() {
             this.axios
                 .get('http://localhost:8000/api/products/')
                 .then(response => {
-                    this.data= response.data;
-                    console.log(response.data);
+                    this.products= response.data;
                 });
         }
     }

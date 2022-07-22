@@ -19,7 +19,6 @@
                 .get('http://localhost:8000/api/categories/')
                 .then(response => {
                     this.categories = response.data;
-                    console.log(this.categories);
                 });
         },
         methods: {

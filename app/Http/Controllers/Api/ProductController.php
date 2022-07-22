@@ -4,20 +4,20 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductRequest;
-use App\Repositories\Interfaces\ProductRepositoryInterface;
+use App\Services\Interfaces\ProductServiceInterface;
 
 class ProductController extends Controller
 {
-    private $productRepository;
+    private $productService;
 
-    public function __construct(ProductRepositoryInterface $productRepository)
+    public function __construct(ProductServiceInterface $productService)
     {
-        $this->productRepository = $productRepository;
+        $this->productService = $productService;
     }
 
     public function index()
     {
-        $products = $this->productRepository->all();
+        $products = $this->productService->listOfProducts();
         return response()->json($products);
     }
 
@@ -28,7 +28,7 @@ class ProductController extends Controller
 
     public function store(ProductRequest $productRequest)
     {
-        $product = $this->productRepository->create($productRequest->only(['name', 'description', 'price', 'image', 'categories']));
+        $product = $this->productService->createProduct($productRequest);
         return response()->json($product);
     }
 
@@ -45,14 +45,16 @@ class ProductController extends Controller
 
     public function update(ProductRequest $request, $id)
     {
-        $productUpdated = $this->productRepository->update($request->only(['name', 'description', 'price', 'image']), $id);
-        return response()->json($productUpdated);
+        //
     }
 
 
     public function destroy($id)
     {
-        $deleted = $this->productRepository->delete($id);
-        return response()->json([$deleted]);
+        //
+    }
+
+    public function filterProductsByCategory(int $category_id) {
+        return $this->productService->filterProductsByCategory($category_id);
     }
 }

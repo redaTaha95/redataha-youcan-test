@@ -42,14 +42,4 @@ class ProductRequest extends FormRequest
             'data'      => $validator->errors()
         ]));
     }
-
-    public function messages()
-    {
-        return [
-            "name.required" => "The name of product is mandatory",
-            "description.required" => "The description of product is mandatory",
-            "price.required" => "The price of product is mandatory",
-            "image.required" => "The image of product is mandatory",
-        ];
-    }
 }
